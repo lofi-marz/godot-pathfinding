@@ -43,6 +43,7 @@ public class AStar
             openList.Remove(current);
             closedList.Add(current);
             //GD.Print(current.Pos);
+
             for (int dy = -1; dy < 2; dy++)
             {
                 int y = (int)current.Pos.y + dy;
@@ -52,9 +53,12 @@ public class AStar
                 for (int dx = -1; dx < 2; dx++)
                 {
                     if (dy == dx) continue;
-					
+                    if (!(dx == 0 || dy == 0)) continue;
                     int x = (int)current.Pos.x + dx;
                     if (x < 0 || x >= Width) continue;
+                    
+                    
+                    
                     Types cell = (Types)Terrain.GetCell(x, y);
                     Vector2 pos = new Vector2(x, y);
                     ASNode neighbour = new ASNode(pos, cell == Types.Wall);
